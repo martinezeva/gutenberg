@@ -19,7 +19,7 @@ import {
 import { Button } from '@wordpress/components';
 import { plus } from '@wordpress/icons';
 
-const blockNavigationContext = { useBlockNavigationSlots: false };
+const blockNavigationContext = { withBlockNavigationSlots: false };
 
 function HeaderToolbar( { onToggleInserter, isInserterOpen } ) {
 	const {

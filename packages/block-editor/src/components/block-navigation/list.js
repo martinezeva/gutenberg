@@ -22,7 +22,7 @@ import ButtonBlockAppender from '../button-block-appender';
 import { BlockListBlockContext } from '../block-list/block';
 
 export const BlockNavigationContext = createContext( {
-	useBlockNavigationSlots: true,
+	withBlockNavigationSlots: true,
 } );
 
 export default function BlockNavigationList( {
@@ -35,7 +35,7 @@ export default function BlockNavigationList( {
 	showNestedBlocks,
 	parentBlockClientId,
 } ) {
-	const { useBlockNavigationSlots } = useContext( BlockNavigationContext );
+	const { withBlockNavigationSlots } = useContext( BlockNavigationContext );
 	const shouldShowAppender = showAppender && !! parentBlockClientId;
 
 	return (
@@ -49,7 +49,7 @@ export default function BlockNavigationList( {
 				const isSelected = block.clientId === selectedBlockClientId;
 				return (
 					<BlockNavigationListItem
-						withSlot={ useBlockNavigationSlots }
+						withSlot={ withBlockNavigationSlots }
 						block={ block }
 						key={ block.clientId }
 						isSelected={ isSelected }
