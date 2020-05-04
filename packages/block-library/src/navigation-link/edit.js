@@ -29,8 +29,6 @@ import {
 	RichText,
 	__experimentalLinkControl as LinkControl,
 	__experimentalBlock as Block,
-	__experimentalBlockNavigationListItemFill as BlockNavigationListItemFill,
-	__experimentalBlockNavigationListItem as BlockNavigationListItem,
 } from '@wordpress/block-editor';
 import { isURL, prependHTTP } from '@wordpress/url';
 import {
@@ -47,8 +45,6 @@ import { link as linkIcon } from '@wordpress/icons';
  * Internal dependencies
  */
 import { ToolbarSubmenuIcon, ItemSubmenuIcon } from './icons';
-
-const noop = () => {};
 
 function NavigationLinkEdit( {
 	attributes,
@@ -222,14 +218,6 @@ function NavigationLinkEdit( {
 					/>
 				</PanelBody>
 			</InspectorControls>
-			<BlockNavigationListItemFill>
-				<BlockNavigationListItem
-					wrapperComponent="div"
-					onClick={ noop }
-				>
-					{ editField }
-				</BlockNavigationListItem>
-			</BlockNavigationListItemFill>
 			<Block.li
 				className={ classnames( {
 					'is-editing': isSelected || isParentOfSelectedBlock,

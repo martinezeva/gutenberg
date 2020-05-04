@@ -18,7 +18,7 @@ export { default as BlockNavigationDropdown } from './block-navigation/dropdown'
 export {
 	default as __experimentalBlockNavigationList,
 	BlockNavigationContext as __experimentalBlockNavigationContext,
-	ListItemFill as __experimentalBlockNavigationListItemFill,
+	BlockNavigationListItemFill as __experimentalBlockNavigationListItemFill,
 } from './block-navigation/list';
 export { default as __experimentalBlockNavigationListItem } from './block-navigation/list-item';
 export { default as __experimentalBlockVariationPicker } from './block-variation-picker';

@@ -48,14 +48,13 @@ export default function BlockNavigationList( {
 			{ map( omitBy( blocks, isNil ), ( block ) => {
 				const isSelected = block.clientId === selectedBlockClientId;
 				return (
-					<li key={ block.clientId }>
-						<ListItemWrapper
-							withSlot={ useBlockNavigationSlots }
-							block={ block }
-							isSelected={ isSelected }
-							onClick={ () => selectBlock( block.clientId ) }
-						/>
-
+					<BlockNavigationListItem
+						withSlot={ useBlockNavigationSlots }
+						block={ block }
+						key={ block.clientId }
+						isSelected={ isSelected }
+						onClick={ () => selectBlock( block.clientId ) }
+					>
 						{ showNestedBlocks &&
 							!! block.innerBlocks &&
 							!! block.innerBlocks.length && (
@@ -70,7 +69,7 @@ export default function BlockNavigationList( {
 									showNestedBlocks
 								/>
 							) }
-					</li>
+					</BlockNavigationListItem>
 				);
 			} ) }
 			{ shouldShowAppender && (
@@ -92,35 +91,38 @@ BlockNavigationList.defaultProps = {
 	selectBlock: () => {},
 };
 
-const ListItemWrapper = ( { withSlot, ...props } ) => {
+const BlockNavigationListItem = ( { withSlot, children, ...props } ) => {
 	if ( ! withSlot ) {
 		return <ListItem { ...props } />;
 	}
 
 	return (
-		<ListItemSlot blockId={ props.block.clientId }>
-			{ ( fills ) => {
-				if ( ! fills.length ) {
-					return <ListItem { ...props } />;
-				}
+		<li>
+			<BlockNavigationListItemSlot blockId={ props.block.clientId }>
+				{ ( fills ) => {
+					if ( ! fills.length ) {
+						return <ListItem { ...props } />;
+					}
 
-				return Children.map( fills, ( fill ) =>
-					cloneElement( fill, {
-						...props,
-						...fill.props,
-					} )
-				);
-			} }
-		</ListItemSlot>
+					return Children.map( fills, ( fill ) =>
+						cloneElement( fill, {
+							...props,
+							...fill.props,
+						} )
+					);
+				} }
+			</BlockNavigationListItemSlot>
+			{ children }
+		</li>
 	);
 };
 
 const listItemSlotName = ( blockId ) => `BlockNavigationList-item-${ blockId }`;
 
-export const ListItemSlot = ( { blockId, ...props } ) => (
+export const BlockNavigationListItemSlot = ( { blockId, ...props } ) => (
 	<Slot { ...props } name={ listItemSlotName( blockId ) } />
 );
-export const ListItemFill = ( props ) => {
+export const BlockNavigationListItemFill = ( props ) => {
 	const { clientId } = useContext( BlockListBlockContext );
 	return <Fill { ...props } name={ listItemSlotName( clientId ) } />;
 };
